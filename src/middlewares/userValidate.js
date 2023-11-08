@@ -1,4 +1,4 @@
-const userSchema = require('../filters/userSchema');
+const { userSchema } = require('../filters/userSchema');
 const dataVerify = require('../features/functions');
 
 const requestsValidate = {
@@ -8,6 +8,7 @@ const requestsValidate = {
 
             next();
         } catch (error) {
+            console.log(error.message);
             return res.status(400).json({message: error.errors});
         }
     },

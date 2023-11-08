@@ -2,7 +2,7 @@ const knex = require('../databaseConnection');
 const dataVerify = require('../features/functions');
 
 const categoryController = {
-    async create (req, res) {
+    async createCategory (req, res) {
         const { description } = req.body;
 
         try {
@@ -18,7 +18,7 @@ const categoryController = {
         }
     },
 
-    async read (req, res) {
+    async readCategory (req, res) {
         try {
             const categoryList = await knex('categories');
 
@@ -29,7 +29,7 @@ const categoryController = {
         }
     },
 
-    async update (req, res) {
+    async updateCategory (req, res) {
         const { id } = req.params;
         const { description } = req.body;
 
