@@ -1,11 +1,11 @@
 const knex = require('../databaseConnection');
 const bcrypt = require('bcrypt');
 
-const userAuthenticate = async (email, password) => {
+const userAuthenticate = async (email, senha) => {
     try {
-        const user = await knex('users').where({email}).first();
+        const user = await knex('usuarios').where({email}).first();
 
-        if(user && await bcrypt.compare(password, user.password)){
+        if(user && await bcrypt.compare(senha, user.senha)){
             return user;
         }
         throw { message: 'Credenciais inválidas'}

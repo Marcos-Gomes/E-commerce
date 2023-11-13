@@ -5,19 +5,19 @@ const userAuthenticate = require('../features/userAuthenticate');
 
 const userData = {
     async createUser(req, res){
-        const {name, email, password} = req.body;
+        const {nome, email, senha} = req.body;
 
         try {
-            const encryptedPassword = await bcrypt.hash(password, 10);
+            const encryptedPassword = await bcrypt.hash(senha, 10);
     
             let newUser = {
-                name,
+                nome,
                 email,
-                password: encryptedPassword,
-                created_at: new Date()
+                senha: encryptedPassword,
+                data_criacao: new Date()
             }
 
-            await knex('users').insert(newUser);
+            await knex('usuarios').insert(newUser);
 
             return res.status(201).json({message: "Usuário criado com sucesso"});
         } catch (error) {
@@ -25,17 +25,17 @@ const userData = {
         }
     },
     async login(req, res){
-        const { email, password } = req.body;
+        const { email, senha } = req.body;
 
         try {
-            let user = await userAuthenticate(email, password);
+            let user = await userAuthenticate(email, senha);
 
-            delete user.created_at;
-            delete user.password;
+            delete user.data_criacao;
+            delete user.senha;
             
             const token = jwt.sign({ 
                 id: user.id,
-                name: user.name,
+                nome: user.name,
                 email: user.email,
             }, process.env.JWT_PASS, { expiresIn: "8h" });            
             
@@ -56,7 +56,7 @@ const userData = {
                 password: encryptedPassword
             }
 
-            await knex('users').where({ id: req.user.id }).update(user);
+            await knex('usuarios').where({ id: req.user.id }).update(user);
 
             return res.status(201).json({ message: "Usuário atualizado com sucesso"});
         } catch (error) {

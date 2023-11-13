@@ -7,8 +7,7 @@ const requestsValidate = {
             await userSchema.validate(req.body);
 
             next();
-        } catch (error) {
-            console.log(error.message);
+        } catch (error) {            
             return res.status(400).json({message: error.errors});
         }
     },
@@ -25,15 +24,14 @@ const requestsValidate = {
         try {
             const { email } = req.body;
 
-            const emailExists = await dataVerify('users', 'email', email);
+            const emailExists = await dataVerify('usuarios', 'email', email);
 
              if(emailExists){
                 return res.status(403).json({ message: 'O e-mail cadastrado já existe.'});
             }
 
             next();
-        } catch (error) {
-            console.log(error.message)
+        } catch (error) {            
             return res.status(500).json({message: 'Falha ao processar a requisição, tente novamente mais tarde'});
         }
     }

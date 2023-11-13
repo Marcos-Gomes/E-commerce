@@ -3,16 +3,16 @@ const dataVerify = require('../features/functions');
 
 const categoryController = {
     async createCategory (req, res) {
-        const { description } = req.body;
+        const { descricao } = req.body;
 
         try {
             const newCategory = {
-                description,
+                descricao,
             }
 
-            await knex('categories').insert(newCategory);
+            await knex('categorias').insert(newCategory);
 
-            return res.status(201).json({ message: `A categoria ${description} foi criada com sucesso` });
+            return res.status(201).json({ message: `A categoria ${descricao} foi criada com sucesso` });
         } catch (error) {            
             return res.status(500).json({ message: "Falha ao adicionar a categoria. Verifique os dados informados e tente novamente"});
         }
@@ -20,51 +20,52 @@ const categoryController = {
 
     async readCategory (req, res) {
         try {
-            const categoryList = await knex('categories');
+            const categoryList = await knex('categorias');        
+
+            if(!categoryList || categoryList.length == 0){
+                return res.status(404).json({ message: "Nenhuma categoria cadastrada"});
+            }
 
             return res.status(200).json({ categoryList });
-        } catch (error) {
-            console.log(error.message);
+        } catch (error) {            
             return res.status(500).json({ message: "Falha ao tentar solicitar a requisição"});
         }
     },
 
     async updateCategory (req, res) {
         const { id } = req.params;
-        const { description } = req.body;
+        const { descricao } = req.body;
 
         try {
-            const showCategory = await dataVerify('categories', 'id', id);
+            const showCategory = await dataVerify('categorias', 'id', id);
 
             if(!showCategory){
                 return res.status(404).json({ message: "Categoria não encontrada"});
             }
 
             const categoryUpdate = {
-                description
+                descricao
             }
 
-            await knex('categories').where({ id }).update(categoryUpdate);
+            await knex('categorias').where({ id }).update(categoryUpdate);
 
             return res.status(201).json({ message: "Categoria editada com sucesso!"});
-        } catch (error) {
-            console.log(error.message);
+        } catch (error) {            
             return res.status(500).json({ message: "Falha ao editar a categoria. Verifique os dados informados e tente novamente"});
-        }
-    
+        }    
     },
 
     async deleteCategory (req, res) {
         const { id } = req.params;
 
         try {
-            const showCategory = await dataVerify('categories', 'id', id);
+            const showCategory = await dataVerify('categorias', 'id', id);
 
             if(!showCategory){
                 return res.status(404).json({ message: "Categoria não encontrada"});
             }
 
-            await knex('categories').where({ id }).delete();
+            await knex('categorias').where({ id }).delete();
 
             return res.status(201).json({ message: "Categoria deletada com sucesso!"});
 
