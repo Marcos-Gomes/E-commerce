@@ -1,5 +1,5 @@
 const { userSchema } = require('../filters/userSchema');
-const dataVerify = require('../features/functions');
+const dataVerify = require('../features/dataVerify');
 
 const requestsValidate = {
     async userValidate (req, res, next){

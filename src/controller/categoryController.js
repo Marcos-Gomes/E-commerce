@@ -1,5 +1,5 @@
 const knex = require('../databaseConnection');
-const dataVerify = require('../features/functions');
+const dataVerify = require('../features/dataVerify');
 
 const categoryController = {
     async createCategory (req, res) {
