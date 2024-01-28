@@ -15,14 +15,13 @@ const tokenValidate = async (req, res, next) => {
         const user = jwt.verify(token, process.env.JWT_PASS);
 
         req.user = {
-            id: user.id,
-            name: user.name,
+            id: user.id,            
             email: user.email
         };
 
         next();
     } catch (error) {
-        return res.status(500).json({ message: "Para acessar este conteúdo é necessário fazer o login"});
+        return res.status(500).json({ message: "Para acessar este conteúdo é necessário fazer login"});
     }
 }
 

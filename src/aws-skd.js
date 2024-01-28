@@ -47,8 +47,9 @@ const deleteFile = async (path) => {
     const deleteCommand = new DeleteObjectCommand(deleteParams);
 
     await s3.send(deleteCommand);
+    console.log(`Arquivo ${path} deletado com sucesso.`);
   } catch (error) {
-    console.error(error);
+    console.error(`Erro ao deletar o arquivo ${path}:`, error);
     throw error;
   }
 };
