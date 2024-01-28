@@ -114,7 +114,7 @@
 
 O backend utiliza autenticação baseada em tokens. Certifique-se de incluir o token JWT nas requisições autorizadas.
 
-###Contato
+### Contato
 
 Para dúvidas ou suporte, entre em contato [marcosube@gmail.com].
 
