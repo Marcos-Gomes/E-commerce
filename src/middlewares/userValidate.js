@@ -26,7 +26,9 @@ const requestsValidate = {
 
             const emailExists = await dataVerify('usuarios', 'email', email);
 
-             if(emailExists){
+            const customerEmailExists = await dataVerify('clientes', 'email', email);
+
+             if(emailExists || customerEmailExists){
                 return res.status(403).json({ message: 'O e-mail cadastrado já existe.'});
             }
 

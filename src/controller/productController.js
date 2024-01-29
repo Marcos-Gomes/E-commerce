@@ -1,5 +1,4 @@
 const { uploadFile } = require('../aws-skd');
-const { deleteFile} = require('../backBlazeB2');
 const knex = require('../databaseConnection');
 const decodeBase64 = require('../features/decodeBase64');
 const imageBase64 = require('../features/imageBase64');
