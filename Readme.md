@@ -117,5 +117,3 @@ O backend utiliza autenticação baseada em tokens. Certifique-se de incluir o t
 ### Contato
 
 Para dúvidas ou suporte, entre em contato [marcosube@gmail.com].
-
-
