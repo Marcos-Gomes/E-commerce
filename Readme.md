@@ -1,10 +1,10 @@
-#Em contrução
+# Em contrução
 
-#E-commerce
+# E-commerce
 
-######O Backend E-Commerce é a parte do sistema de comércio eletrônico responsável por gerenciar a lógica de negócios, manipulação de dados e interações com o banco de dados. Este projeto utiliza tecnologias modernas para garantir um desempenho eficiente e uma experiência de compra confiável.
+###### O Backend E-Commerce é a parte do sistema de comércio eletrônico responsável por gerenciar a lógica de negócios, manipulação de dados e interações com o banco de dados. Este projeto utiliza tecnologias modernas para garantir um desempenho eficiente e uma experiência de compra confiável.
 
-###Tecnologias Utilizadas
+### Tecnologias Utilizadas
 - Node.js 
 - Express
 - PostgreSQL
@@ -13,14 +13,14 @@
 - Multer
 - Cors
 
-###Funcionalidades Principais
+### Funcionalidades Principais
 
 - Gerenciamento de produtos, pedidos e usuários.
 - Autenticação segura de usuários.
 - Integração com serviços de pagamento.
 - API RESTful para interação com o frontend.
 
-###Instalação
+### Instalação
 
 1. Clone o repositório: git clone `https://github.com/Marcos-Gomes/E-commerce.git`
 1. Navegue para o diretório do projeto: `cd backend-e-commerce`
@@ -28,7 +28,7 @@
 1. Configure as variáveis de ambiente (consulte `.env.example`).
 1. Inicie o servidor: `npm run dev`
 
-###Endpoints da API
+### Endpoints da API
 
 1. `/cadastrar`
     - **Descrição:** Realiza o cadastro para utilizar a aplicação.
@@ -110,11 +110,11 @@
 1. `/user`
 1. `/categorias`
 
-###Autenticação
+### Autenticação
 
 O backend utiliza autenticação baseada em tokens. Certifique-se de incluir o token JWT nas requisições autorizadas.
 
-###Contato
+### Contato
 
 Para dúvidas ou suporte, entre em contato [marcosube@gmail.com].
 
