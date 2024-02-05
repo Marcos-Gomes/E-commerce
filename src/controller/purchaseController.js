@@ -38,7 +38,42 @@ const purchaseController = {
         } catch (error) {            
             return res.status(500).json({ message: "Falha ao registrar a compra, verifique os dados e tente novamente"});
         }        
-    }
+    },
+    
+    async purchaseList(req, res) {
+        try {
+            const purchases = await knex('pedidos').where('cliente_id', req.user.id);
+
+            let allPurchases = [];
+
+            for (let purchase of purchases) {
+                const orderProducts = await knex('pedido_produtos').where('pedido_id', purchase.id);
+
+                let totalValue = 0;
+
+                for (let product of orderProducts) {
+                    totalValue += product.valor_produto;                    
+                }
+
+                purchase.valor_total = totalValue;
+
+                allPurchases.push({
+                    pedido: purchase,
+                    pedido_produtos: orderProducts
+                });
+
+                if (purchase.cliente_id === req.user.id) {
+                    break;
+                }
+            }
+
+            return res.status(200).json({ allPurchases });
+        } catch (error) {
+            console.log(error.message);
+            return res.status(500).json({ message: "Favor verificar os dados enviados" });
+        }
+}
+
 }
 
 module.exports = purchaseController;
