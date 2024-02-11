@@ -24,13 +24,17 @@ const requestsValidate = {
         try {
             const { email } = req.body;
 
-            const emailExists = await dataVerify('usuarios', 'email', email);
+            const userEmailExists = await dataVerify('usuarios', 'email', email);
 
             const customerEmailExists = await dataVerify('clientes', 'email', email);
-
-             if(emailExists || customerEmailExists){
+            
+            if (customerEmailExists) {
                 return res.status(403).json({ message: 'O e-mail cadastrado já existe.'});
             }
+
+            if(userEmailExists){
+                return res.status(403).json({ message: 'O e-mail cadastrado já existe.'});
+            } 
 
             next();
         } catch (error) {            

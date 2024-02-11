@@ -1,4 +1,5 @@
 const knex = require('../databaseConnection');
+const purchaseConfirm = require('../features/purchaseConfirm');
 
 const purchaseController = {
     async registerPurchase(req, res){
@@ -33,6 +34,8 @@ const purchaseController = {
             });
 
             await Promise.all(orderProductPromises);
+
+            await purchaseConfirm(req.user.email);
             
             return res.status(201).json({ message: "Compra realizada com sucesso"});
         } catch (error) {            

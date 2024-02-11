@@ -37,10 +37,9 @@ const userData = {
                 id: user.id,
                 nome: user.name,
                 email: user.email,
-            }, process.env.JWT_PASS, { expiresIn: "8h" });            
-            
-            return res.status(200).json({ user, token });
+            }, process.env.JWT_PASS, { expiresIn: "8h" });
 
+            return res.status(200).json({ user, token });
         } catch (error) {
             return res.status(401).json({ message: error.message});
         }        
