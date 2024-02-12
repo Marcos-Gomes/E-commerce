@@ -2,6 +2,7 @@ const knex = require('../databaseConnection');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const userAuthenticate = require('../features/userAuthenticate');
+const sendEmail = require('../features/mailSend');
 
 const userData = {
     async createUser(req, res){
@@ -38,6 +39,11 @@ const userData = {
                 nome: user.name,
                 email: user.email,
             }, process.env.JWT_PASS, { expiresIn: "8h" });
+
+            const subject = "Você acabou de fazer login";
+            const text = "Você fez login, se não foi você bloqueie sua conta agora";
+
+            await sendEmail(email, subject, text);
 
             return res.status(200).json({ user, token });
         } catch (error) {

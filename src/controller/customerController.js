@@ -4,6 +4,7 @@ const dataVerify = require('../features/dataVerify');
 const cepEncontrado = require('../features/cep');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const sendEmail = require('../features/mailSend');
 
 const customerController = {
     async createCustomer(req, res){
@@ -62,6 +63,11 @@ const customerController = {
                 nome: customer.nome,
                 email: customer.email,
             }, process.env.JWT_PASS, { expiresIn: "8h" });
+
+            const subject = "Você acabou de fazer login";
+            const text = "Você fez login, se não foi você bloqueie sua conta agora";
+
+            await sendEmail(email, subject, text);
 
             return res.status(200).json({ customer, token });
         } catch (error) {

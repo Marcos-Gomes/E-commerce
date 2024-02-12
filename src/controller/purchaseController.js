@@ -1,5 +1,5 @@
 const knex = require('../databaseConnection');
-const purchaseConfirm = require('../features/purchaseConfirm');
+const sendEmail = require('../features/mailSend');
 
 const purchaseController = {
     async registerPurchase(req, res){
@@ -35,7 +35,10 @@ const purchaseController = {
 
             await Promise.all(orderProductPromises);
 
-            await purchaseConfirm(req.user.email);
+            const subject = "Pedido gerado com sucesso";
+            const text = "Notificamos que seu pedido foi gerado";
+
+            await sendEmail(req.user.email, subject, text);
             
             return res.status(201).json({ message: "Compra realizada com sucesso"});
         } catch (error) {            
@@ -71,8 +74,7 @@ const purchaseController = {
             }
 
             return res.status(200).json({ allPurchases });
-        } catch (error) {
-            console.log(error.message);
+        } catch (error) {            
             return res.status(500).json({ message: "Favor verificar os dados enviados" });
         }
 }
